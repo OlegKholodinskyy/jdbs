@@ -118,12 +118,63 @@ public class Solution {
         return listOfProducts;
     }
 
+
+    public static void increasePrice() {
+        try (Connection connection = DriverManager.getConnection(DB_URL, USER, PASS);
+             Statement statement = connection.createStatement()) {
+
+            int countOfProductsChanged = statement.executeUpdate("UPDATE PRODUCT SET PRICE = PRICE + 100 WHERE PRICE < 970");
+            System.out.println("Updated + " + countOfProductsChanged + "fields");
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+    }
+
+    public static void changeDescription() {
+        try (Connection connection = DriverManager.getConnection(DB_URL, USER, PASS);
+             Statement statement = connection.createStatement()) {
+
+            ResultSet resultSet = statement.executeQuery("SELECT * FROM PRODUCT WHERE DBMS_LOB.GETLENGTH(DESCRIPTION)>100");
+            listOfProducts = new ArrayList<>();
+            while (resultSet.next()) {
+                listOfProducts.add(new Product(resultSet.getInt(1),
+                        resultSet.getString(2),
+                        resultSet.getString(3),
+                        resultSet.getDouble(4)));
+            }
+
+         cutLastSentence();
+
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+    }
+
+    private static String cutLastSentence() {
+        String someText = "1fdsfsd! 2fsf fsfs.  3fsfs? 4fsdsf   fffff.  5jjjj";
+       int lastIndex;
+
+       for (int i=0; i<(someText.length()-1); i++){
+           if (someText.charAt(i)== '.' || someText.charAt(i) == '?' || someText.charAt(i) == '!' ){
+               System.out.println("yes" + i);
+           }
+
+       }
+
+
+
+       return null;
+    }
+
+
     public static void main(String[] args) {
-       // saveProduct();
+        // saveProduct();
         // deleteProducts();
         // deleteProductsByPrice();
-       // getAllProducts();
-       // getProductsByPrice();
-        getProductsByDescription();
+        // getAllProducts();
+        // getProductsByPrice();
+        // getProductsByDescription();
+        //increasePrice();
+        cutLastSentence();
     }
 }
