@@ -1,4 +1,4 @@
-package lesson1;
+package lesson2;
 
 import java.sql.*;
 
@@ -21,9 +21,16 @@ public class JDBCFirstStep {
                 return;
             }
 
-            try (ResultSet resultSet = statement.executeQuery("SELECT * FROM MOVIE")) {
+            try (ResultSet resultSet = statement.executeQuery("SELECT * FROM ORDERS WHERE PRICE >= 11")) {
                 while (resultSet.next()) {
-                    System.out.println(resultSet.getInt(1));
+                    long id = resultSet.getInt(1);
+                    String productName = resultSet.getString(2);
+                    int price = resultSet.getInt(3);
+                    Date dateOrdered = resultSet.getDate(4);
+                    Date dateConfirmed = resultSet.getDate(5);
+                    Order order = new Order(id,productName,price,dateOrdered,dateConfirmed);
+                    System.out.println(order);
+                   // System.out.println(resultSet.getInt(1));
                    // System.out.println("Object found");
                 }
             }
