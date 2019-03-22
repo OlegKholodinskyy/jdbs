@@ -7,7 +7,7 @@ public class Solution {
 
     private static final String DB_URL = "jdbc:oracle:thin:@gromcode-lessons.cmbqecodcoqo.us-east-2.rds.amazonaws.com:1521:ORCL";
     private static final String USER = "main";
-    private static final String PASS = "wersys243900";
+    private static final String PASS = "243900243900";
     static ArrayList<Product> listOfProducts;
 
     public static void saveProduct() {
@@ -143,27 +143,27 @@ public class Solution {
                         resultSet.getDouble(4)));
             }
 
-         cutLastSentence();
 
+            for (Product product : listOfProducts){
+                String query = "UPDATE PRODUCT SET DESCRIPTION = '" + cutLastSentence(product.getDescription()) + "' WHERE ID = " + product.getId();
+                int res = statement.executeUpdate(query);
+            }
         } catch (SQLException e) {
             e.printStackTrace();
         }
     }
 
-    private static String cutLastSentence() {
-        String someText = "1fdsfsd! 2fsf fsfs.  3fsfs? 4fsdsf   fffff.  5jjjj";
-       int lastIndex;
-
-       for (int i=0; i<(someText.length()-1); i++){
-           if (someText.charAt(i)== '.' || someText.charAt(i) == '?' || someText.charAt(i) == '!' ){
-               System.out.println("yes" + i);
-           }
-
-       }
-
-
-
-       return null;
+    private static String cutLastSentence(String someText) {
+        int lastIndex = 0;
+        int prev = 0;
+        for (int i = 0; i < someText.length(); i++) {
+            if (someText.charAt(i) == '.' || someText.charAt(i) == '?' || someText.charAt(i) == '!') {
+                prev = lastIndex;
+                lastIndex = i;
+            }
+        }
+            String cutLastSentenceString = someText.substring(0, prev+1);
+            return cutLastSentenceString;
     }
 
 
@@ -175,6 +175,6 @@ public class Solution {
         // getProductsByPrice();
         // getProductsByDescription();
         //increasePrice();
-        cutLastSentence();
+        changeDescription();
     }
 }
