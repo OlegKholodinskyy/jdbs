@@ -11,8 +11,8 @@ public class Demo {
         Product product2 = new Product(996, "testUpdate", "testUpdateDesctiption", 999);
         productDAO.update(product2);
         // DELETE
-        productDAO.delete(997);
-        //GETALLPRODUCTS
+        productDAO.delete(10);
+        //GET_ALL_PRODUCTS
         System.out.println(productDAO.getProducts());
 
     }

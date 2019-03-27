@@ -73,15 +73,17 @@ public class ProductDAO {
         try (Connection connection = getConnection();
              Statement statement = connection.createStatement()) {
 
-            int result = statement.executeUpdate("DELETE FROM PRODUCT WHERE ID = " + id );
-
-            System.out.println("Product with id : " + id + " deleted.");
+            int result = statement.executeUpdate("DELETE FROM PRODUCT WHERE ID = " + id);
+            if (result != 0)
+                System.out.println("Product with id : " + id + " deleted.");
+            else{
+                System.out.println("NOTHING DELETED");
+            }
 
         } catch (SQLException e) {
             System.out.println("SOMETHING WENT WRONG");
             e.printStackTrace();
         }
-
 
 
         return null;
