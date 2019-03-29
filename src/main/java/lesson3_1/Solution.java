@@ -70,13 +70,13 @@ public class Solution {
         String[] words = word.trim().split(" ");
 
         if (word == null) throw new Exception("word is null");
-        if (words.length != 1) throw new Exception("sentence must contain only one word");
-        if (word.length() <= 3) throw new Exception("word must contain more than 3 sumbols");
+        if (words.length != 1) throw new Exception("word : " + word + ". sentence must contain only one word");
+        if (word.length() <= 3) throw new Exception("word : " + word + ". word must contain more than 3 sumbols");
 
         char[] arr = word.toCharArray();
         for (char c : arr) {
             if (!Character.isLetter(c) && !Character.isDigit(c))
-                throw new Exception("word must contain only digital or letter");
+                throw new Exception("word : " + word + ".  word must contain only digital or letter");
         }
     }
 
