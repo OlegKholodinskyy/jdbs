@@ -15,7 +15,7 @@ public class Storage {
         id =Initializator.getMaxIDStorage();
     }
 
-    private Storage(long id, String[] formatsSupported, String storageCountry, long storageMaxSize) {
+    public Storage(long id, String[] formatsSupported, String storageCountry, long storageMaxSize) {
         this.id = id;
         this.formatsSupported = formatsSupported;
         this.storageCountry = storageCountry;

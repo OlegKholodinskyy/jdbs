@@ -9,7 +9,7 @@ public class Initializator {
 
     private static final String DB_URL = "jdbc:oracle:thin:@gromcode-lessons.cmbqecodcoqo.us-east-2.rds.amazonaws.com:1521:ORCL";
     private static final String USER = "main";
-    private static final String PASS = "ххх";
+    private static final String PASS = "xxx";
 
     public static void initializeMaxIDs() {
         try (Connection connection = DriverManager.getConnection(DB_URL, USER, PASS);

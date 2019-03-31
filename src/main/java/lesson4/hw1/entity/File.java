@@ -17,7 +17,7 @@ public class File {
         id = Initializator.getMaxIDFile();
     }
 
-    private File(long id, String name, String format, long size, Storage storage) {
+    public File(long id, String name, String format, long size, Storage storage) {
         this.id = id;
         this.name = name;
         this.format = format;
