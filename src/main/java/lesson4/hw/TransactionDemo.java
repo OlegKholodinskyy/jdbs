@@ -1,6 +1,6 @@
-package lesson4;
+package lesson4.hw;
 
-import lesson4.Exception.BadSavingException;
+import lesson4.hw.Exception.BadSavingException;
 
 import java.sql.Connection;
 import java.sql.DriverManager;

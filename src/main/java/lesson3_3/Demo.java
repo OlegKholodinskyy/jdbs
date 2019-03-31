@@ -1,4 +1,4 @@
-package lessonn3_3;
+package lesson3_3;
 
 import java.sql.SQLException;
 
