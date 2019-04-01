@@ -1,31 +1,20 @@
 package lesson4.hw1.entity;
 
-import lesson4.hw1.service.Initializator;
-
 import java.util.Arrays;
 
 public class Storage {
-    private static long id;
-    private  String[] formatsSupported;
+    private  long id = 0;
+    private String[] formatsSupported;
     private String storageCountry;
     private long storageMaxSize;
-
-
-    static{
-        id =Initializator.getMaxIDStorage();
-    }
 
     public Storage(long id, String[] formatsSupported, String storageCountry, long storageMaxSize) {
         this.id = id;
         this.formatsSupported = formatsSupported;
         this.storageCountry = storageCountry;
         this.storageMaxSize = storageMaxSize;
-        id++;
     }
 
-    public Storage(String[] formatsSupported, String storageCountry, long storageMaxSize) {
-       this(id, formatsSupported,storageCountry,storageMaxSize);
-    }
 
     public long getId() {
         return id;

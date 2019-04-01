@@ -1,21 +1,16 @@
 package lesson4.hw1.entity;
 
-import javafx.fxml.Initializable;
-import lesson4.hw1.service.Initializator;
-
 import java.util.Objects;
 
 public class File {
 
-    private static long id;
+    private  long id;
     private String name;
     private String format;
     private long size;
     private Storage storage;
 
-    static  {
-        id = Initializator.getMaxIDFile();
-    }
+
 
     public File(long id, String name, String format, long size, Storage storage) {
         this.id = id;
@@ -23,12 +18,8 @@ public class File {
         this.format = format;
         this.size = size;
         this.storage = storage;
-        id++;
     }
 
-    public File(String name, String format, long size, Storage storage) {
-        this(id,name,format,size,storage);
-    }
 
     public long getId() {
         return id;
