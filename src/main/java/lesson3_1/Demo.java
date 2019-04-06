@@ -14,10 +14,12 @@ public class Demo {
         }
 
         //findProductsByName
+
+        System.out.println("findProductsByName");
         List<Product> products2 = null;
         try {
             //      products2 = solution.findProductsByName("doll");
-            products2 = solution.findProductsByName("dl122@@@");
+            products2 = solution.findProductsByName("dol");
 
         } catch (Exception e) {
             System.out.println(e.getMessage());
@@ -29,7 +31,7 @@ public class Demo {
         }
 
         // findProductsWithEmptyDescription
-
+        System.out.println("findProductsWithEmptyDescription");
         List<Product> products3 = null;
         try {
             products3 = solution.findProductsWithEmptyDescription();

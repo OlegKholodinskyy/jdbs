@@ -17,14 +17,13 @@ public class Solution {
     public List<Product> findProductsByPrice(int price, int delta) {
         ArrayList<Product> products = new ArrayList<>();
         try (Connection connection = getConnection();
-             Statement statement = connection.createStatement()) {
+             PreparedStatement ps = connection.prepareStatement("SELECT * FROM PRODUCT WHERE PRICE <= ?  AND PRICE >= ?")) {
 
-
-            String query = "SELECT * FROM PRODUCT WHERE PRICE <= " + (price + delta) + " AND PRICE >= " + (price - delta);
-            ResultSet res = statement.executeQuery(query);
+            ps.setInt(1, price + delta);
+            ps.setInt(2, price - delta);
+            ResultSet res = ps.executeQuery();
 
             while (res.next()) {
-
                 products.add(new Product(res.getLong(1),
                         res.getString(2),
                         res.getString(3),
@@ -39,16 +38,14 @@ public class Solution {
 
     public List<Product> findProductsByName(String word) throws Exception {
 
-
         ckeckWord(word);
-
         ArrayList<Product> products = new ArrayList<>();
         try (Connection connection = getConnection();
-             Statement statement = connection.createStatement()) {
+             PreparedStatement ps = connection.prepareStatement("SELECT * FROM PRODUCT WHERE NAME LIKE ?")) {
 
+            ps.setString(1, "%" + word + "%");
 
-            String query = "SELECT * FROM PRODUCT WHERE NAME LIKE  '%" + word + "%'";
-            ResultSet res = statement.executeQuery(query);
+            ResultSet res = ps.executeQuery();
 
             while (res.next()) {
 
@@ -71,11 +68,11 @@ public class Solution {
 
         if (word == null) throw new Exception("word is null");
         if (words.length != 1) throw new Exception("word : " + word + ". sentence must contain only one word");
-        if (word.length() <= 3) throw new Exception("word : " + word + ". word must contain more than 3 sumbols");
+        if (word.length() < 3) throw new Exception("word : " + word + ". word must contain more than 3 sumbols");
 
         char[] arr = word.toCharArray();
         for (char c : arr) {
-            if (!Character.isLetter(c) && !Character.isDigit(c))
+            if (!Character.isLetter(c)  &&  !Character.isDigit(c))
                 throw new Exception("word : " + word + ".  word must contain only digital or letter");
         }
     }
@@ -87,7 +84,7 @@ public class Solution {
 
             ResultSet resultSet = statement.executeQuery("SELECT * FROM PRODUCT WHERE DESCRIPTION IS NULL");
 
-            while (resultSet.next()){
+            while (resultSet.next()) {
                 Product product = new Product(resultSet.getLong(1),
                         resultSet.getString(2),
                         resultSet.getString(3),
