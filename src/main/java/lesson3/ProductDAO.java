@@ -7,7 +7,7 @@ import java.util.List;
 public class ProductDAO {
     private static final String DB_URL = "jdbc:oracle:thin:@gromcode-lessons.cmbqecodcoqo.us-east-2.rds.amazonaws.com:1521:ORCL";
     private static final String USER = "main";
-    private static final String PASS = "***";
+    private static final String PASS = "xxx";
 
 
     public Product save(Product product) {
@@ -69,11 +69,13 @@ public class ProductDAO {
     }
 
 
-    public Product delete(long id) {
+    public void delete(long id) {
         try (Connection connection = getConnection();
-             Statement statement = connection.createStatement()) {
+             PreparedStatement ps = connection.prepareStatement("DELETE FROM PRODUCT WHERE ID = ?")) {
 
-            int result = statement.executeUpdate("DELETE FROM PRODUCT WHERE ID = " + id);
+            ps.setLong(1,id);
+
+            int result = ps.executeUpdate();
             if (result != 0)
                 System.out.println("Product with id : " + id + " deleted.");
             else{
@@ -84,9 +86,6 @@ public class ProductDAO {
             System.out.println("SOMETHING WENT WRONG");
             e.printStackTrace();
         }
-
-
-        return null;
     }
 
 

@@ -5,13 +5,13 @@ public class Demo {
         ProductDAO productDAO = new ProductDAO();
 
         //SAVE
-        Product product = new Product(10, "test", "testDesctiption", 99);
-        productDAO.save(product);
+//        Product product = new Product(10, "test", "testDesctiption", 99);
+//        productDAO.save(product);
         //UPDATE
-        Product product2 = new Product(996, "testUpdate", "testUpdateDesctiption", 999);
+        Product product2 = new Product(333, "testUpdate", "testUpdateDesctiption", 999);
         productDAO.update(product2);
         // DELETE
-        productDAO.delete(10);
+//        productDAO.delete(10);
         //GET_ALL_PRODUCTS
         System.out.println(productDAO.getProducts());
 
